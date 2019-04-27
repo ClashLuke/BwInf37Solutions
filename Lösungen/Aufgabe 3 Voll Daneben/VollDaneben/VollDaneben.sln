@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VollDanebenGUI", "VollDanebenGUI\VollDanebenGUI.csproj", "{EA66C23D-8D26-4D4A-A119-83B9D954BA52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VollDanebenAPI", "VollDanebenAPI\VollDanebenAPI.csproj", "{669FCCA5-AB89-4F4D-A4CA-DDA11555DF9F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA66C23D-8D26-4D4A-A119-83B9D954BA52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA66C23D-8D26-4D4A-A119-83B9D954BA52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA66C23D-8D26-4D4A-A119-83B9D954BA52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA66C23D-8D26-4D4A-A119-83B9D954BA52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{669FCCA5-AB89-4F4D-A4CA-DDA11555DF9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{669FCCA5-AB89-4F4D-A4CA-DDA11555DF9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{669FCCA5-AB89-4F4D-A4CA-DDA11555DF9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{669FCCA5-AB89-4F4D-A4CA-DDA11555DF9F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {437B6EF3-6CC3-47E7-B5B1-56711742745B}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,47 @@
+﻿"Superstar.ShowGroup" = "Gruppe anzeigen"
+"Superstar.Generate" = "Generieren"
+"Superstar.LoadGroup" = "Laden"
+"Superstar.LoadGroup.Title" = "Datei von der Gruppe geladen werden soll auswählen"
+"Superstar.LoadGroup.InvalidFile" = "Invalide Datei"
+"Superstar.Generate.InvalidSize" = "Wert muss größer 0 sein"
+"Superstar.Generate.InvalidValue" = "Eingabe nicht in korrektem Format"
+"Superstar.Generate.GroupSize" = "Gruppen Größe"
+"Superstar.Generate.GroupSize.Tooltip" = "Anzahl an zu generierenden Mitgliedern"
+
+"Superstar.Confirm" = "BESTÄTIGEN"
+"Superstar.Cancel" = "ABBRECHEN"
+
+"Superstar.ShowLog" = "Protokoll anzeigen"
+"Superstar.FindSuperstar" = "Superstar finden"
+
+"Superstar.SuperstarTitle" = "Superstar:"
+"Superstar.BillTitle" = "Kosten:"
+"Superstar.Superstar" = "{0}"
+"Superstar.Bill" = "{0}€"
+"Superstar.Superstar.Undetermined" = "Unentschieden"
+"Superstar.Superstar.None" = "Keiner"
+
+
+"Superstar.Group" = "Gruppe"
+"Superstar.Users" = "Nutzer ({0})"
+"Superstar.FollowsLabel" = "Folgt ({0})"
+"Superstar.FollowersLabel" = "Follower ({0})"
+
+"Superstar.Log.Exclusion" = "-> {0} ist nicht der Superstar, hatte eine Wahrscheinlichkeit von {1}"
+"Superstar.Log.RaisedPropability" = "-> {0} ist wahrscheinlicher der Superstar zu sein, jetzt {1}"
+"Superstar.Log.Investigate" = "
+------------------------------------------------------------------------------
+{0} ist am wahrscheinlichsten Superstar zu sein (Wahrscheinlichkeit = {1})
+----------------------- Beginn der Ermittlungen ------------------------------
+"
+"Superstar.Log.Follows.Left" = "Folgt {0} {1}: {2}"
+"Superstar.Log.Follows.Right" = "Kosten jetzt {3}€"
+"Superstar.Log.Follows.Padding" = "78"
+"Superstar.Log.Follows.True" = "Ja"
+"Superstar.Log.Follows.False" = "Nein"
+"Superstar.Log.Found" = "
+{0} ist der Superstar
+Endgültige Kosten sind {1}€"
+"Superstar.Log.Failed" = "
+Es gibt keinen Superstar
+Endgültige Kosten sind {1}€"

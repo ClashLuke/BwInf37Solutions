@@ -1,0 +1,30 @@
+﻿"Widerstand.ResistanceUnit" = "{0} Ω"
+
+"Widerstand.Resistance" = "Resistance"
+"Widerstand.Target" = "Target"
+"Widerstand.Difference" = "Difference"
+
+"Widerstand.Run.Confirm" = "CONFIRM"
+"Widerstand.Run.Cancel" = "CANCEL"
+"Widerstand.Run.Count" = "Resistor Maximum"
+"Widerstand.Run.Count.Tooltip" = "Highest allowed Count of Resistors (k)"
+"Widerstand.Run.Target" = "Target Resistance"
+"Widerstand.Run.Target.Tooltip" = "Resistance to approximate"
+
+"Widerstand.Resistors.Title" = ""
+"Widerstand.Resistors.Resistors" = "Resistors"
+
+"Widerstand.Resistors.Generator.Minimum" = "Minimum"
+"Widerstand.Resistors.Generator.Minimum.Tooltip" = "Minimum Resistance"
+"Widerstand.Resistors.Generator.Maximum" = "Maximum"
+"Widerstand.Resistors.Generator.Maximum.Tooltip" = "Maximum Resistance"
+"Widerstand.Resistors.Generator.Count" = "Count"
+"Widerstand.Resistors.Generator.Count.Tooltip" = "Amount of Resistors"
+
+"Widerstand.Resistors.Generator.AllowFraction" = "Allow Fraction"
+"Widerstand.Resistors.Generator.AllowFraction.Tooltip" = "Whether fractional numbers are allowed"
+
+"Widerstand.Resistors.Generator.Confirm" = "CONFIRM"
+"Widerstand.Resistors.Generator.Cancel" = "CANCEL"
+
+"Widerstand.Resistors.FileSelector" = "Select file"

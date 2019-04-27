@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwistGUI", "TwistGUI\TwistGUI.csproj", "{0DF08EC7-B0BE-4931-83B8-FE6A283869D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwistAPI", "TwistAPI\TwistAPI.csproj", "{CFDD6128-492B-4E60-9924-2D44A8DE950E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0DF08EC7-B0BE-4931-83B8-FE6A283869D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF08EC7-B0BE-4931-83B8-FE6A283869D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DF08EC7-B0BE-4931-83B8-FE6A283869D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DF08EC7-B0BE-4931-83B8-FE6A283869D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFDD6128-492B-4E60-9924-2D44A8DE950E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFDD6128-492B-4E60-9924-2D44A8DE950E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFDD6128-492B-4E60-9924-2D44A8DE950E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFDD6128-492B-4E60-9924-2D44A8DE950E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05FC3817-7F23-43D4-A14C-CF4A9129C98F}
+	EndGlobalSection
+EndGlobal

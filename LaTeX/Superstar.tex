@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{Csharp}
+
+\newcommand{\q}[1]{\textbf{#1}}
+\begin{document}
+
+\title{
+{\Huge Aufgabe 1\\Superstar}\\
+\vspace{.5cm}
+\begin{large}
+Team-Name: Bruteforce\\
+Team-ID: 00139\\
+Bearbeiter:\\ 
+\end{large}
+\begin{normalsize}
+P1,
+P3,
+P4,
+P2
+\end{normalsize}
+}
+\author{}
+\date{}
+\maketitle
+\vspace{5cm}
+\tableofcontents
+\newpage
+\begin{flushleft}
+\section{Superstar}
+\subsection{Lösungsansatz}
+Die Idee zur Lösung des Problems basiert auf dem Ansatz, das wahrscheinlichste Ergebnis so lange zu verfolgen, bis es sich bewahrheitet, oder es sich herausstellt, dass es nicht die Lösung ist, woraufhin man das Verfahren mit dem am nächst wahrscheinlichsten Element (in diesem Fall User) wiederholt. Um die Anzahl der Abfragen zu minimieren, werden bei der Überprüfung noch zusätzlich  Rückschlüsse auf die andere, in der Abfrage vorhandene, Person geschlossen.
+
+\subsection{Implementierung}
+Bei der Implementierung haben wir uns dazu entschieden, einen objektorientierten Ansatz zu wählen. Dabei werden drei Klassen verwendet.
+\begin{itemize}
+
+	\item User
+	\begin{itemize}
+		\item reine Container-Klasse
+	\end{itemize}
+	
+	\item TeeniGramGroup
+	\begin{itemize}
+		\item 2 Konstruktoren
+		\begin{itemize}
+			\item aus Datei
+			\item aus zufälliger Liste mit eigenen Attributen
+		\end{itemize}
+		\item enthält alle Entitäten von User
+		\item enthält Hauptüberprüfung
+		\item übernimmt Ausgabe in Log-Konsole
+	\end{itemize}
+	\item SuperSearch
+	\begin{itemize}
+		\item Hauptprogramm
+	\end{itemize}
+\end{itemize}
+\subsection{Beispiel}
+Um zu zeigen, wie der Algorithmus arbeitet, wird er im folgenden auf die "superstar2.txt" angewendet.
+\begin{itemize}
+	\item Zuerst wird überprüft, ob Hoare Turing folgt, was zutrifft, woraus man schließen kann, dass Hoare kein Superstar sein kann.
+	\item Nun überprüft man, ob Dijkstra Turing folgt, was nicht zutrifft, weshalb man ausschließen kann, dass Turing der Superstar ist.
+	\item Jetzt wird das Verfahren mit Dijkstra wiederholt, das heißt, dass man überprüft, ob alle anderen User Dijkstra folgen, bis man eine Person findet, die ihm nicht folgt, mit der man dann das Verfahren erneut wiederholen würde.
+	\item Da sich jedoch herausstellt, dass alle anderen User Dijkstra folgen, ist die Suche beendet und Dijkstra ist der Superstar.
+\end{itemize}
+\newpage
+\subsection{Code}
+%\begin{Csharp}
+%\end{Csharp}
+%insert code and other shit
+Das Hauptprogramm in der SuperSearch-Klasse besteht aus folgenden Komponenten:
+\begin{itemize}
+	\item Eine 2D-Dictionary, der jeden Person jede Person und die Eigenschaft, ob die 2. Person der ersten folgt zuordnet.
+\begin{Csharp}
+Dictionary<int, Dictionary<int, bool>> following = new Dictionary<int, Dictionary<int, bool>>();
+\end{Csharp}
+	\item Eine Methode um festzustellen, ob eine Überprüfung bereits vorgenommen wurde.
+\begin{Csharp}
+bool HasAsked(int a, int b) => following.ContainsKey(a) && following[a] != null && following[a].ContainsKey(b);
+\end{Csharp}
+	\item Eine Methode um festzustellen, ob eine Person der anderen Folgt unter Beachtung vorheriger Abfragen.
+\begin{Csharp}
+bool Follows(User a, User b, out bool hasAsked)
+{
+    if (!(hasAsked = HasAsked(a, b)))
+    {
+        if (!following.ContainsKey(a)) following[a] = new Dictionary<User, bool>();
+
+        following[a].Add(b, group.Follows(a, b, ref bill));
+    }
+    return following[a][b];
+}
+\end{Csharp}
+	\item Ein Dictionary was die Wahrscheinlichkeiten Superstar zu sein der Nutzer speichert, wobei eine Wahrscheinlichleit von -1 der Unmöglichkeit Superstar zu sein entspricht
+\begin{Csharp}
+Dictionary<User, int> propabilites = group.users.ToDictionary(x => x, x => 0);
+\end{Csharp}
+	\item Eine Methode Check, die überprüft ob ein Nutzer einem anderen folgt und die Wahrscheinlichkeiten demnach editiert.
+\begin{Csharp}
+bool Check(User a, User b)
+{
+    bool follows = Follows(a, b, out bool hasAsked);
+
+    User userWithIncreasedPropability = follows ? b : a;
+    User excludedUser = follows ? a : b;
+
+    if (!hasAsked)
+    {
+        if (propabilites[excludedUser] != -1)
+        {
+            propabilites[excludedUser] = -1;
+        }
+        if (propabilites[userWithIncreasedPropability] != -1)
+        {
+            propabilites[userWithIncreasedPropability]++;
+        }
+    }
+
+    return follows;
+}
+\end{Csharp}
+	\newpage
+	\item Die Methode Investigate, die Hauptüberprüfung, ob eine Person ein Star ist, enthält.
+	\begin{itemize}
+		\item Zuerst wird überprüft, ob schon durch eine frühere Abfrage ausgeschlossen, dass die Person ein Superstar ist.
+\begin{Csharp}
+if (propabilites[toInvestigate] == -1) return false;
+\end{Csharp}
+		\item Danach wird eine Liste erstellt, die alle Personen, außer die aktuell betrachtete, enthält.
+\begin{Csharp}
+List<User> indicies = group.users
+	.Where(x => x != toInvestigate)
+	.ToList();
+\end{Csharp}
+		\item Daraufhin wird eine Schleife laufen gelassen, solange indicies nicht leer ist. In jedem Schleifendurchlauf wird der User ausgewählt, der am wahrscheinlichsten der Superstar ist und dann aus indicies entfernt.
+		\item Danach wird überprüft ob der ausgewähltee User dem aktuell betrachteten folgt.
+\begin{Csharp}
+Check(toInvestigate, index);
+\end{Csharp}
+		\item Wenn dem so ist, kann der aktuell betrachte User kein Superstar sein und die Suche ist beendet.
+\begin{Csharp}
+if (propabilites[toInvestigate] == -1) return false;
+\end{Csharp}
+		\item Nun wird überprüft, ob der wahrscheinlichste User auf keinen Fall Superstar sein kann und wenn dem so ist und es kein Komplett-Check ist, kann der Rest des aktuellen Schleifendurchlaufs übersprungen werden.
+\begin{Csharp}
+if (!deep && propabilites[index] == -1) continue;
+\end{Csharp}
+		\item Als letzte Aktion des Schleifendurchlaufs wird noch überprüft, ob der aktuell betrachtete User dem ausgewählten User folgt. Unter der Prämisse, das dies der Wahrheit entspricht, kann der aktuell betrachtete User nicht der Superstar sein.
+\begin{Csharp}
+Check(index, toInvestigate);
+if (propabilites[toInvestigate] == -1) return false;
+\end{Csharp}
+		\item Ist die Schleife beendet und war es eine komplette Suche, dann steht fest, dass der aktuell betrachtete User der Superstar ist, wenn deep = false ist, kann dieser Zustand mehrmals (von verschiedenen Usern) erreicht werden, wobei die komplette Suche meist mehr kostet als die normale Suche.
+\begin{Csharp}
+return true;
+\end{Csharp}
+	\end{itemize}
+	\item Eine Schleife, die so lange läuft, bis sie das Ergebnis findet. Dafür wird das im Lösungsansatz verwendete Verfahren genutzt und Investigate mit allen Usern durchgeführt.
+\begin{Csharp}
+while (true)                                                                                 
+{                                                                                            
+    User highest = group.users.Aggregate((x, y) => propabilites[x] > propabilites[y] ? x : y);
+    	// Wahrscheinlichsten Nutzer finden
+
+    if (propabilites[highest] == -1)
+    	// Falls die maximale Wahrscheinlichkeit -1 ist sind alle Wahrscheinlichkeiten -1 und demnach existiert kein Superstar
+    {
+        finalBill = bill;
+
+        return null;
+    }
+    else
+    {
+        if (Investigate(highest, false) && Investigate(highest, true))
+        	// a() && b() führt b() nur aus wenn a() wahr ist, deshalb wird die komplette Suche (Investigate(x, true)) nur durchgeführt wenn die normale wahr ausgibt
+        {
+            finalBill = bill;
+            return highest;
+        }
+    }
+}
+\end{Csharp}
+	
+\end{itemize}
+\end{flushleft}
+\end{document}

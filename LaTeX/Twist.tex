@@ -1,0 +1,395 @@
+\documentclass{article}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{Csharp}
+\usepackage[ngerman]{babel}
+\lstset{
+	basicstyle=\tiny
+}
+
+\begin{document}
+
+\title{
+{\Huge Aufgabe 2\\Twist}\\
+\vspace{.5cm}
+\begin{large}
+Team-Name: Bruteforce\\
+Team-ID: 00139\\
+Bearbeiter:\\ 
+\end{large}
+\begin{normalsize}
+P1,
+P3,
+P4,
+P2
+\end{normalsize}
+}
+\author{}
+\date{}
+\maketitle
+\vspace{5cm}
+\tableofcontents
+\newpage
+\begin{flushleft}
+
+\section{Twisten}
+
+\subsection{Lösungsansatz}
+Das Twisten besteht primär aus zwei Teilen, dem Aufteilen in einzelne Worte und dem Twisten dieser einzelnen Worte.
+
+Wir haben Worte als zusammenhängende Ketten von Buchstaben klassifiziert, da dies das Trennen dieser reduziert auf einen Test, ob ein Zeichen Buchstabe ist oder nicht.
+
+Das eigentliche Twisten von Worten funktioniert durch zufälliges auswählen von Buchstaben aus dem Orginalwort und anfügen dieser am das Ende des getwisteten Wortes, wobei Anfangs- und Endbuchstabe beide ignoriert werden und seperat an Anfang und Ende eingefügt werden
+Ein Wort mit 3 oder weniger Buchstaben kann sich durch Twisten nicht verändern, weshalb es übersprungen werden kann.
+
+
+\subsection{Implementierung}
+Für die Implementierung haben wir uns entschieden in C\# zwei Methoden zu schreiben;
+\begin{itemize}
+\item Die Methode \textbf{Twist} ist die Haupt-Methode und ist verantwortlich für das Trennen des Textes in einzelne Worte und für diese jeweils die zweite Methode aufzurufen
+\item Die Methode \textbf{TwistWord} ist verantwortlich für das Twisten individueller Worte
+\end{itemize}
+
+Die Methode \textbf{Twist} erstellt zwei StringBuilder, einen für die Speicherung des resultierenden getwistetem Textes, und einen für Zwischenspeicherung des aktuellen Wortes.
+Danach beginnt die Methode über den Text Zeichen für Zeichen zu iterieren, wobei bei jedem Zeichen geprüft wird ob es ein Buchstabe ist oder nicht.
+Falls das Zeichen ein Buchstabe ist wird es zum Wort-Zwischenspeicher addiert, falls nicht wird der Wort-Zwischenspeicher in getwisteter Fassung an das Ergebnis gehängt zusammen mit dem Orginalen Zeichen und wird der Wort-Zwischenspeicher anschließend geleert.
+
+Die Methode \textbf{TwistWord} die dabei aufgerufen wird entscheidet zunächst durch die Länge des Wortes ob ein Wort getwistet werden muss oder nicht. Sollte das Wort nicht twist-bar sein wird es in Orginal-Fassung an das Resultat gehängt. Falls nicht wird der Anfangsbuchstabe an das Resultat gehängt und das Programm beginnt mit der im Lösungsansatz beschriebenen Methodik zufällige Buchstaben zu selektieren und dem Resultat anzufügen. Abschließend fügt die Methode dem Resultat den letzten Buchstaben an.
+
+\newpage
+\subsection{Beispiel}
+\begin{Csharp}
+Twist("Beispiel-Text ver5.3", x => {}, null);
+{
+  current = ""
+            "B"
+	  	    "Be"
+		    ...
+		    "Beispiel"
+  c = '-', - ist kein Buchstabe
+  TwistWord(current = "Beispiel", sb = "", rand);
+  {
+    sb = ""
+         "B"
+         "Bs"
+         "Bse"
+         ...
+         "Bsepiie"
+         "Bsepiiel"
+  }
+  sb = "Bsepiiel"
+       "Bsepiiel-"
+       ...
+       "Bsepiiel-Txet "
+  current = "ver"
+  c = '5'
+  TwistWord(current = "ver", sb = "Bsepiiel-Txet ", rand);
+  {
+    sb = "Bsepiiel-Txet "     // current ist drei Buchstaben lang,
+                              // wird also übersprungen
+       = "Bsepiiel-Txet ver"
+  }
+  ...
+  sb = "Bsepiiel-Txet ver5.3"
+}
+=> "Bsepiiel-Txet ver5.3"
+\end{Csharp}
+
+\newpage
+\subsection{Code}
+\begin{Csharp}
+public static string Twist(string text, Action<double> progressHandler, 
+	Random rand = null)
+{
+    StringBuilder sb = new StringBuilder(), current = new StringBuilder();
+    rand = rand ?? new Random();  
+    	// Neue Instanz generieren wenn keine oder null übergeben wurde
+    double step = 1d / text.Length;
+    double progress = 0;
+    foreach (char c in text)
+    {
+        if (char.IsLetter(c)) current.Append(c);
+        else
+        {
+            TwistWord(current, sb, rand);
+            current.Clear();
+            sb.Append(c);
+        }
+        progressHandler(progress += step);
+    }
+    TwistWord(current, sb, rand); 
+    	// Das letzte Wort würde ignoriert werden wenn das letzte Zeichen im Text ein Buchstabe ist
+    progressHandler(1);
+
+    return sb.ToString();
+}
+
+private static void TwistWord(StringBuilder text, StringBuilder sb, Random rand)
+{
+    if (text.Length <= 3) 
+    	// Worte mit 3 Buchstaben oder weniger können nicht getwistet werden
+    {
+        sb.Append(text);
+    }
+    else
+    {
+        sb.Append(text[0]); // Anfangsbuchstabe bleibt gleich
+        for (int i = 1; text.Length > 2; i++)
+        {
+            int pos = rand.Next(1, text.Length - 1);
+            sb.Append(text[pos]);
+            text = text.Remove(pos, 1);
+        }
+        sb.Append(text[1]); // Endbuchstabe bleibt gleich
+    }
+}
+\end{Csharp}
+
+\newpage
+\section{Detwisten}
+
+\subsection{Lösungsansatz}
+Beim detwisten kann das Problem analog zum Twisten in aufteilen des Textes in einzelne Worte und Detwisten dieser aufgeteilt werden, jedoch ist das Detwisten nicht ganz so trivial wie das Twisten, und ohne Optimierungen sehr langsam.
+Das Detwisten von Worten kann grundlegend durch Vergleiche mit allen Worten aus dem Wörterbuch gelöst werden, wobei jeder dieser Vergleiche testet ob die durch Twisten unveränderten Eigenschaften identisch sind. Diese Eigenschaften sind: Anfangs- und Endbuchstaben, Länge und Buchstaben (ungeordnet).
+Durch Vergleichen von Anfangs- und Endbuchstaben und Länge mit Worten aus dem Wörterbuch kann die Anzahl der Möglichkeiten mit wenig Rechenaufwand drastisch reduziert werden, was das Vergleichen der Buchstaben aller verbleibenden Möglichkeiten daraufhin stark beschleunigt.
+Das Vergleichen der Buchstaben funktioniert durch iterieren über die Buchstaben vom Körper (Wort ohne seine Anfgangs- und Endbuchstaben) des zu detwistendem Wortes und entfernen dieser aus dem Körper der verbleibenden Möglichkeiten. Sollte dabei der aktuelle Buchstabe nicht bzw. nicht mehr in dem verbbleibenden Körper der übrigen Möglichkeiten vorhanden sein, so wird diese Möglichkeit ausgeschlossen.
+Am Ende dieser Überprüfungen können alle verbleibenden Möglichkeiten als alle möglichen Lösungen deklariert werden, da die Länge aller übrigen Möglichkeiten bereits nach dem ersten Schritt gleich sein muss und da jeglicher Unterschied früher oder später zu einer Elimination aufgrund mangelnder Buchstaben führen würde.
+
+\subsection{Implementierung}
+Die Implementierung wurde wie bei Twist in C\# durchgeführt, wobei wir ähnlich wie bei Twist 3 Methoden die für das Aufspalten in Worte und Detwisten dieser verantworlich sind;
+\begin{itemize}
+\item Die Methode \textbf{DeTwist} ist die Haupt-Methode und ist verantwortlich für das Trennen des Textes in einzelne Worte und für diese jeweils die zweite Methode aufzurufen
+\item Die Methode \textbf{DeTwistWord} ist verantwortlich für das Detwisten individueller Worte
+\item Die Methode \textbf{DeTwistWordAndWriteSolutions} ist eine Helfer-Methode die \textbf{DeTwistWord} ausführt und dessen Lösungen formatiert und ausgibt
+\end{itemize}
+und einer seperaten Klasse \textbf{LangCook}, welche ein Mapping der Worte enthält, welches eine Liste aller Worte mit gleichen Anfangs- und Endbuchstaben und gleicher Länge mit dieser gemeinsamen Eigenschaft gruppiert mit dem Schlüssel \textit{Anfangsbuchstabe + Endbuchstabe + Länge}. 
+Zudem ist die \textbf{LangCook} Klasse verantwortlich für laden dieser Worte aus normalen Texten, und für speichern dieser mit Anwendung des vorhergenannten Musters.
+Der Grund warum diese \textbf{LangCook}-Datei hilfreich ist, ist das sie das Vergleichen von Anfangs- und Endbuchstaben und Länge durch Caching drastisch beschleunigt.
+Die Implementation der vorher genannten Methoden ist teilweise analog zum Twisten und restlich durch den Lösungsansatz bereits beschrieben.
+
+\newpage
+\subsection{Beispiele}
+\begin{Csharp}
+DeTwist("Bsepiiel-Txet ver5.3", LangCook.BwInfDefaultGerman, x => {});
+{
+  current = ""
+            "B"
+	  	    "Bs"
+		    ...
+		    "Bsepiiel"
+  DeTwistWord(text = "Bsepiiel", LangCook.BwInfDefaultGerman);
+  {
+  	remainder = { "Ballsaal", "Beispiel", "Baseball" }
+  				{ "Ballaal" , "Beipiel" , "Baeball"  }
+  				{ eliminiert, "Bipiel"  , "Baball"   }
+  				{           , "Biiel"   , eliminiert }
+  				...
+  				{           , "Bl"      ,            }
+    sb = "Beispiel"
+  }
+  sb = "Beispiel"
+       "Beispiel-"
+       ...
+       "Beispiel-Text "
+  current = "ver"
+  DeTwistWord(text = "ver", LangCook.BwInfDefaultGerman);
+  {
+    sb = "Beispiel-Text "     // text ist drei Buchstaben lang, 
+                              // wird also übersprungen
+    sb = "Beispiel-Text ver"
+  }
+  ...
+  sb = "Beispiel-Text ver5.3"
+}
+=> "Beispiel-Text ver5.3"
+\end{Csharp}
+
+\newpage
+\subsection{Code}
+\begin{Csharp}
+public static string DeTwist(string text, LangCook language, 
+	Action<double> progressHandler)
+{
+    StringBuilder sb = new StringBuilder(), current = new StringBuilder();
+    double step = 1d / text.Length;
+    double progress = 0;
+    foreach (char _char in text)
+    {
+        if (char.IsLetter(_char)) current.Append(_char);
+        else
+        {
+            DeTwistWordAndWriteSolutions(current, sb, language);
+            current.Clear();
+            sb.Append(_char);
+        }
+        progressHandler(progress += step);
+    }
+    DeTwistWordAndWriteSolutions(current, sb, language);
+    progressHandler(1);
+
+    return sb.ToString();
+}
+
+private static void DeTwistWordAndWriteSolutions(StringBuilder word, 
+	StringBuilder sb, LangCook language)
+// Ruft DeTwistWord auf und gibt Ergebnisse in passendem Format aus, Code ausgelassen
+
+private static List<string> DeTwistWord(string text, LangCook language)
+{
+    if (text.Length <= 3) 
+    	// Worte mit maximal 3 Buchstaben können nicht getwistet werden, und somit auch nicht enttwistet
+    {
+        return new List<string> { text };
+    }
+    else
+    {
+        string textLower = text.ToLower();
+        var remainder = language[LangCook.GetKey(textLower)]
+                        .Select(x => new
+                        {
+                            original = x,
+                            body = new StringBuilder(
+                            	x.Substring(1, x.Length - 2))
+                        })
+                        .ToList();
+
+        for (int i = 1; i < textLower.Length - 1; i++)
+        {
+            for (int j = 0; j < remainder.Count; j++)
+            {
+                int index = remainder[j].body.ToString().IndexOf(textLower[i]);
+
+                if (index == -1) remainder.RemoveAt(j--);
+                else remainder[j].body.Remove(index, 1);
+            }
+        }
+
+
+        return remainder.Select(x => x.original.CopyCase(text)).ToList();
+    }
+}
+
+private static string CopyCase(this string target, string source)
+{
+    if (source.Length != target.Length) throw new ArgumentException(
+    	"Source and Target have different sizes");
+    return new string(Enumerable.Range(0, source.Length)
+        .Select(x => 
+        	char.IsUpper(source[x]) ? 
+        	    char.ToUpper(target[x])
+        	  : (
+        	  		char.IsLower(source[x]) ?
+        	   		    char.ToLower(target[x]) 
+        	    	  : target[x]
+        	    )
+        )
+        .ToArray());
+}
+\end{Csharp}
+
+\begin{Csharp}
+public class LangCook
+{
+    public static readonly LangCook BwInfDefaultGerman = new LangCook(
+    	"LangCooks/Default/bwinfDefaultGerman.langcook", 
+    	false, 
+    	"../../../../LangCooks/Default/bwinfDefaultGerman.txt", 
+    	"LangCooks/Default/bwinfDefaultGerman.txt");
+
+    private Dictionary<string, List<string>> words;
+    public List<string> this[string c] => 
+    	words.GetValueOrDefault(c, new List<string>());
+
+    public LangCook()
+    {
+        words = new Dictionary<string, List<string>>();
+    }
+
+    public LangCook(string langcookPath, params string[] paths) : this()
+    {
+        if (File.Exists(langcookPath))
+        {
+            LoadLangcook(langcookPath);
+        }
+        else
+        {
+            foreach (string path in paths) IncludeFile(path);
+            WriteLangcook(langcookPath, this);
+        }
+    }
+
+    public void LoadLangcook(string langcookPath)
+    {
+        string[] file = File.ReadAllLines(langcookPath, Encoding.UTF8);
+
+        try
+        {
+            for (int pointer = 0; pointer < file.Length;)
+            {
+                string[] args = file[pointer].Split('#');
+                int count = int.Parse(args[0]);
+                string[] result = new string[count];
+                Array.Copy(file, ++pointer, result, 0, count);
+
+                if (words.ContainsKey(args[1]) && words[args[1]] != null)
+                {
+                	words[args[1]].AddRange(result);
+                }
+                else 
+                {
+                	words[args[1]] = result.ToList();
+                }
+
+                pointer += count;
+            }
+        }
+        catch 
+        { 
+        	throw new Exception(
+        		"Input .langcook file was in an incorrect format");
+        }
+    }
+
+    public static LangCook WriteLangcook(string langcookPath, LangCook lang = null)
+    {
+        File.WriteAllLines(
+            langcookPath,
+            lang.words.SelectMany(pair =>
+            	new[] { $"{pair.Value.Count}#{pair.Key}" }
+            	.Union(pair.Value))
+            .ToList(),
+            Encoding.UTF8);
+        return lang;
+    }
+
+    public static Regex toWords;
+
+    public void IncludeFile(string path)
+    {
+        path = Path.GetFullPath(path);
+        if (!File.Exists(path) && !Directory.Exists(path)) return;
+        if (File.GetAttributes(path).HasFlag(FileAttributes.Directory))
+        {
+            foreach (string subPath in Directory.GetFiles(path)) IncludeFile(path);  // Ordner rekursiv durchsuchen
+        }
+        else
+        {
+            if (toWords == null) toWords = new Regex(
+            	@"([a-zA-ZäöüÄÖÜß]{4,})", RegexOptions.Compiled | RegexOptions.IgnoreCase); 
+            	// Keine Worte mit 3 oder weniger Buchstaben speichern
+            foreach (Match match in toWords.Matches(" " + File.ReadAllText(path, Encoding.UTF8) + " "))
+            {
+                string word = match.Groups[0].Value.ToLower(), key = GetKey(word);
+
+                if (!words.ContainsKey(key) || words[key] == null) words[key] = new List<string>();
+                words[key].AddIfNew(word);
+            }
+        }
+    }
+
+    public static string GetKey(string word) => 
+    	$"{word[0]}{word[word.Length - 1]}{word.Length}";
+}
+\end{Csharp}
+
+\end{flushleft}
+\end{document}

@@ -1,0 +1,37 @@
+﻿"VollDaneben.LuckyNumbers" = "Glücks-\nzahlen"
+"VollDaneben.Choices" = "Wahlen"
+
+"VollDaneben.Revenue" = "Einnahmen"
+"VollDaneben.Expenditure" = "Ausgaben"
+"VollDaneben.Total" = "Gesamt"
+
+"VollDaneben.Currency" = "{0} €"
+
+
+"VollDaneben.Choices.Title" = ""
+"VollDaneben.Choices.Choices" = "Wahlen"
+"VollDaneben.Choices.SelectFile" = "Datei auswählen"
+
+
+"VollDaneben.Settings.Title" = "Einstellungen"
+
+"VollDaneben.Settings.Solver" = "Löser"
+
+"VollDaneben.Settings.Solver.Start" = "Start"
+"VollDaneben.Settings.Solver.Start.Tooltip" = "Start index des Lösungs-optimierers"
+"VollDaneben.Settings.Solver.Passes" = "Iterationen"
+"VollDaneben.Settings.Solver.Passes.Tooltip" = "Iterationszahl des Lösungs-optimierers"
+"VollDaneben.Settings.Solver.Stride" = "Stride"
+"VollDaneben.Settings.Solver.Stride.Tooltip" = "Schrittgröße des Lösungs-optimierers"
+"VollDaneben.Settings.Solver.LuckyNumbers" = "Glückszahlen"
+"VollDaneben.Settings.Solver.LuckyNumbers.Tooltip" = "Menge an Glückszahlen"
+
+
+"VollDaneben.Settings.Generator" = "Generator"
+
+"VollDaneben.Settings.Generator.Minimum" = "Minimum"
+"VollDaneben.Settings.Generator.Minimum.Tooltip" = "Minimum"
+"VollDaneben.Settings.Generator.Maximum" = "Maximum"
+"VollDaneben.Settings.Generator.Maximum.Tooltip" = "Maximum"
+"VollDaneben.Settings.Generator.Participants" = "Teilnehmer"
+"VollDaneben.Settings.Generator.Participants.Tooltip" = "Teilnehmer"

@@ -1,0 +1,14 @@
+﻿<Application x:Class="SchrebergaertenGUI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SchrebergaertenGUI"
+             xmlns:material="clr-namespace:MaterialDesign2.Controls;assembly=MaterialDesign2"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Style x:Key="MaterialColorTheme" TargetType="{x:Type Grid}">
+        </Style>
+        <SolidColorBrush x:Key="HighImportanceColor" Color="#FF23B4D4"/>
+        <SolidColorBrush x:Key="HighImportanceColorShade" Color="#FF208B9C"/>
+        <SolidColorBrush x:Key="Text" Color="#FF444444"/>
+    </Application.Resources>
+</Application>

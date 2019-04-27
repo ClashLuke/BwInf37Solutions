@@ -1,0 +1,108 @@
+﻿<material:MaterialWindow x:Class="WiderstandGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WiderstandGUI"
+        xmlns:material="clr-namespace:MaterialDesign2.Controls;assembly=MaterialDesign2"
+        mc:Ignorable="d"
+        
+        Title="Widerstand"
+        Height="549.853" Width="1034.206" Foreground="{DynamicResource HighImportanceColorShade}" LabelBrush="White">
+    <Grid ClipToBounds="True" Style="{StaticResource MaterialColorTheme}" Background="Black">
+        <Grid x:Name="mainGrid" Background="White">
+            <material:PanBorder x:Name="imageBorder" Margin="0,0,0,20" Background="White">
+                <Canvas>
+                    <Image x:Name="image" Stretch="None"/>
+                </Canvas>
+            </material:PanBorder>
+            <material:MaterialScrollBar Margin="5" x:Name="indexScroller" Scroll="Index_Scroll" Orientation="Horizontal" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Stretch" SmallChange="1" BorderThickness="0" BorderBrush="White" Background="{x:Null}" ViewportSize="1" Maximum="2" Foreground="{DynamicResource HighImportanceColorShade}"/>
+
+            <Grid Margin="20,20,20,30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                </Grid.ColumnDefinitions>
+
+                <material:MaterialButton UseLayoutRounding="True" Margin="5" Grid.Column="3" Background="White" ShadowEnabled="True" Click="Settings_Click" CornerRadius="1E+35">
+                    <Grid Margin="10">
+                        <Path Fill="{DynamicResource Text}" Stretch="Fill" Data="
+M0,0L1,0L3,.5L4,.5L6,0L7,0L7.5,.5L7.5,2.5L7,3L6,3L4,2.5L3,2.5L1,3L0,3L-.5,2.5L-.5,.5
+" Margin="0" Height="14"/>
+                    </Grid>
+                </material:MaterialButton>
+                <material:MaterialButton Margin="5" Grid.Column="4" Background="{DynamicResource HighImportanceColor}" ShadowEnabled="True" Click="Run_Click" CornerRadius="1E+35">
+                    <Grid Margin="12">
+                        <Path Fill="{DynamicResource Text}" Stretch="Uniform" Data="M0,0L0,1L0.866025404,0.5" Margin="7.167,0,0,0"/>
+                    </Grid>
+                </material:MaterialButton>
+
+                <material:MaterialButton Margin="4" x:Name="Prev" CornerRadius="1E+35" ShadowEnabled="True" Background="{DynamicResource HighImportanceColor}" Grid.Row="2" Grid.Column="2" Click="Prev_Click">
+                    <Path Data="M1,0L0,1M0,1L1,2 M0,1L2,1" Margin="12" Stroke="{DynamicResource Text}" StrokeThickness="4" Stretch="Fill" StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
+                </material:MaterialButton>
+                <Ellipse Fill="White" Margin="4" Grid.Column="3" Grid.Row="2">
+                    <Ellipse.Effect>
+                        <DropShadowEffect x:Name="DropShadow" ShadowDepth="2" BlurRadius="10" Direction="-90" RenderingBias="Quality" Opacity="0.3"/>
+                    </Ellipse.Effect>
+                </Ellipse>
+                <TextBlock x:Name="counter" Grid.Column="3" Margin="0" Grid.Row="2" HorizontalAlignment="Center" FontFamily="Roboto" FontSize="15" FontWeight="SemiBold" Height="16" VerticalAlignment="Center" Text="0/0" Foreground="{DynamicResource Text}"/>
+                <material:MaterialButton x:Name="Next" Margin="4" Grid.ColumnSpan="1" Grid.Column="4" ShadowEnabled="True" CornerRadius="1E+35" Background="{DynamicResource HighImportanceColor}" Grid.Row="2" Click="Next_Click">
+                    <Path Data="M1,0L2,1M2,1L1,2 M2,1L0,1" Margin="12" Stroke="{DynamicResource Text}" StrokeThickness="4" Stretch="Fill" StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
+                </material:MaterialButton>
+
+                <Border Margin="5,0,5,5" Background="White" CornerRadius="4" Grid.RowSpan="2" VerticalAlignment="Bottom" Height="66" Grid.Row="1">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="3" Opacity="0.25"/>
+                    </Border.Effect>
+                    <Grid Margin="4,3,4,3" TextBlock.FontFamily="Roboto" TextBlock.FontSize="17">
+                        <StackPanel>
+                            <TextBlock Text="Resistance" x:Name="resistanceText" Foreground="{DynamicResource Text}"/>
+                            <TextBlock Text="Target"     x:Name="targetText" Foreground="{DynamicResource Text}"/>
+                            <TextBlock Text="Difference" x:Name="differenceText" Foreground="{DynamicResource Text}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="5 Ω" x:Name="ResistanceResult" TextAlignment="Right" Foreground="{DynamicResource Text}"/>
+                            <TextBlock Text="4 Ω" x:Name="TargetResult" TextAlignment="Right" Foreground="{DynamicResource Text}"/>
+                            <TextBlock Text="1 Ω" x:Name="DifferenceResult" TextAlignment="Right" Foreground="{DynamicResource Text}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Popup x:Name="NumberInputPanePopup" IsOpen="False" PopupAnimation="Fade" Placement="Center" Width="600" Height="300" Margin="-298,-148,298,148" AllowsTransparency="True">
+            <Grid x:Name="NumberInputPane" HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Height="300">
+                <Border IsHitTestVisible="True" UseLayoutRounding="True" Background="White" CornerRadius="4" Grid.Row="1" Grid.Column="1">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" Opacity=".3" ShadowDepth="2"/>
+                    </Border.Effect>
+                    <Grid Margin="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <material:MaterialButton x:Name="confirmButton" Click="Confirm_Click" Text="CONFIRM" Background="{x:Null}" Foreground="{DynamicResource HighImportanceColor}" FontSize="20" LeftMinWidth="15" RightMinWidth="15" FontWeight="Medium" RightMaxWidth="15" LeftMaxWidth="15" LeftWidth="15" RightWidth="15" Padding="0" Grid.Row="2" />
+                        <material:MaterialButton x:Name="cancelButton" Click="Cancel_Click" Text="CANCEL" Background="{x:Null}" Foreground="{DynamicResource HighImportanceColor}" FontSize="20" LeftMinWidth="15" RightMinWidth="15" FontWeight="Medium" RightMaxWidth="15" LeftMaxWidth="15" LeftWidth="15" RightWidth="15" Padding="0" Grid.Row="2" Grid.Column="1" />
+
+                        <material:MaterialTextBoxFilled Margin="10" x:Name="kNumberInput" Label="k" BorderThickness="0" FontSize="30" NumberPane="RealPlus" NumberValue="10" SelectionBrush="{DynamicResource HighImportanceColor}" ActiveLabelBrush="{DynamicResource HighImportanceColorShade}" Grid.ColumnSpan="2"/>
+                        <material:MaterialTextBoxFilled Margin="10" x:Name="targetNumberInput" Label="Target Resistance" BorderThickness="0" FontSize="30" NumberPane="RealPlus" NumberValue="10" Grid.Row="1" ActiveLabelBrush="{DynamicResource HighImportanceColorShade}" SelectionBrush="{DynamicResource HighImportanceColor}" Grid.ColumnSpan="2"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Popup>
+    </Grid>
+</material:MaterialWindow>

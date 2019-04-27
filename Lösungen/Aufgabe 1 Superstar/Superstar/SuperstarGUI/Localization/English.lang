@@ -1,0 +1,47 @@
+﻿"Superstar.ShowGroup" = "Show Group"
+"Superstar.Generate" = "Generate"
+"Superstar.LoadGroup" = "Load"
+"Superstar.LoadGroup.Title" = "Select file to load group from"
+"Superstar.LoadGroup.InvalidFile" = "Invalid File"
+"Superstar.Generate.InvalidSize" = "Size must be greater than 0"
+"Superstar.Generate.InvalidValue" = "Input not in correct format"
+"Superstar.Generate.GroupSize" = "Group Size"
+"Superstar.Generate.GroupSize.Tooltip" = "Amount of members to generate"
+
+"Superstar.Confirm" = "CONFIRM"
+"Superstar.Cancel" = "CANCEL"
+
+"Superstar.ShowLog" = "Show Log"
+"Superstar.FindSuperstar" = "Find Superstar"
+
+"Superstar.SuperstarTitle" = "Superstar:"
+"Superstar.BillTitle" = "Bill:"
+"Superstar.Superstar" = "{0}"
+"Superstar.Bill" = "{0}$"
+"Superstar.Superstar.Undetermined" = "Undetermined"
+"Superstar.Superstar.None" = "None"
+
+
+"Superstar.Group" = "Group"
+"Superstar.Users" = "Users ({0})"
+"Superstar.FollowsLabel" = "Follows ({0})"
+"Superstar.FollowersLabel" = "Followers ({0})"
+
+"Superstar.Log.Exclusion" = "-> {0} is not the superstar, had a propability of {1}"
+"Superstar.Log.RaisedPropability" = "-> {0} is more likely to be the superstar, propability now {1}"
+"Superstar.Log.Investigate" = "
+----------------------------------------------------------------------
+{0} is the most likely to be the superstar (propability = {1})
+----------------------- Starting Investigation -----------------------
+"
+"Superstar.Log.Follows.Left" = "Does {0} follow {1}: {2}"
+"Superstar.Log.Follows.Right" = "Bill now {3}$"
+"Superstar.Log.Follows.Padding" = "70"
+"Superstar.Log.Follows.True" = "Yes"
+"Superstar.Log.Follows.False" = "No"
+"Superstar.Log.Found" = "
+{0} is the superstar
+Final bill is {1}$"
+"Superstar.Log.Failed" = "
+There is no superstar
+Final bill is {1}$"

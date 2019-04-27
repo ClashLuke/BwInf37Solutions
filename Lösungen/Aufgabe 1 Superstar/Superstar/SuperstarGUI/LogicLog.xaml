@@ -1,0 +1,46 @@
+﻿<material:MaterialWindow x:Class="SuperstarGUI.LogicLog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SuperstarGUI"
+        xmlns:material="clr-namespace:MaterialDesign2.Controls;assembly=MaterialDesign2"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        mc:Ignorable="d"
+        
+        Title="Superstar - Log"
+        Height="718.198" Width="1069.797" LabelBrush="White" Foreground="{DynamicResource HighImportanceColorShade}">
+    <Grid Style="{StaticResource MaterialColorTheme}">
+        <Border Margin="5" Background="#FFF3F3F3">
+            <Grid>
+                <TextBox Margin="10,0,0,0" x:Name="textBox" TextWrapping="Wrap" Text="" FontFamily="Source Code Pro" FontSize="18" BorderBrush="{x:Null}" BorderThickness="0" SelectionBrush="{DynamicResource HighImportanceColor}" Background="{x:Null}" Foreground="{DynamicResource UsernameBrush}" IsReadOnly="True" 
+                     ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" FontWeight="Medium">
+                    <TextBox.Template>
+                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                <material:MaterialScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Foreground="{DynamicResource HighImportanceColorShade}"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#FF7EB4EA"/>
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </TextBox.Template>
+                </TextBox>
+
+                <Border BorderBrush="White" Margin="0" BorderThickness="1" ClipToBounds="True" IsHitTestVisible="False">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" ShadowDepth="0" Opacity="0.85" Color="#FF5D00FF"/>
+                    </Border.Effect>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</material:MaterialWindow>

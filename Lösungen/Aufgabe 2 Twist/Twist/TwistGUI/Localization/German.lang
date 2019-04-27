@@ -1,0 +1,12 @@
+﻿"Twist.TwistButton" = "Twisten"
+"Twist.DetwistButton" = "Enttwisten"
+"Twist.Settings" = "Sprache auswählen"
+
+"Twist.FileSelector.Long" = "Dateien zum (ent)twisten auswählen"
+"Twist.FileSelector.Invalid" = "Invalide Datei"
+
+"Twist.Finished.Title" = "Fertig"
+"Twist.Finished.SaveResults" = "Ergebnisse speichern nach"
+
+"Twist.Langcook.Open" = ".langcook Datei oder Dateien zum erstellen einer auswählen"
+"Twist.Langcook.Save" = ".langcook speichern nach"

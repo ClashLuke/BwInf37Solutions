@@ -1,0 +1,95 @@
+﻿<material:MaterialWindow x:Class="SuperstarGUI.MainWindow"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:local="clr-namespace:SuperstarGUI"
+                         xmlns:material="clr-namespace:MaterialDesign2.Controls;assembly=MaterialDesign2"
+                         mc:Ignorable="d"
+                         
+                         Title="Superstar" 
+                         Height="398.175" Width="1082.5" Foreground="{DynamicResource HighImportanceColorShade}" LabelBrush="White">
+    <Grid Style="{StaticResource MaterialColorTheme}" Background="Black">
+        <Grid x:Name="mainGrid" Background="White">
+            <Grid ClipToBounds="False" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <material:MaterialButton FontSize="25" x:Name="showGroup" ShadowEnabled="True" Margin="5" Text="SHOW GROUP"  Click="ClickViewGroup" CornerRadius="4" BorderThickness="0" BorderBrush="{DynamicResource HighImportanceColor}" Background="White" Foreground="{DynamicResource HighImportanceColor}"/>
+                <material:MaterialButton FontSize="25" x:Name="loadGroup" ShadowEnabled="True" Margin="5" Text="LOAD" Click="ClickLoadGroup" CornerRadius="4" BorderThickness="0" Background="White" BorderBrush="{DynamicResource HighImportanceColor}" Foreground="{DynamicResource HighImportanceColor}" Grid.Column="3"/>
+                <material:MaterialButton FontSize="25" x:Name="generate" ShadowEnabled="True" Margin="5" Text="GENERATE" Click="ClickGenerate" CornerRadius="4" Grid.Column="3" Background="White" BorderThickness="0" BorderBrush="{DynamicResource HighImportanceColor}" Foreground="{DynamicResource HighImportanceColor}" Grid.Row="1"/>
+                <material:MaterialButton FontSize="25" x:Name="showLog" ShadowEnabled="True" Margin="5" Text="SHOW LOG" Click="ClickShowLog" CornerRadius="4" Grid.Row="1" BorderBrush="{DynamicResource HighImportanceColor}" BorderThickness="0" Background="White" Foreground="{DynamicResource HighImportanceColor}"/>
+
+                <Border Grid.ColumnSpan="2" Margin="-10,5" CornerRadius="0" Grid.RowSpan="2" BorderBrush="Black" BorderThickness="0" Background="White" Grid.Column="1">
+                    <Border.Effect>
+                        <DropShadowEffect x:Name="DropShadow" ShadowDepth="2" BlurRadius="10" Direction="-90" RenderingBias="Quality" Opacity="0.5"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="superstarTitleLabel" Text="Superstar:" Margin="6" FontSize="25" FontFamily="Roboto" VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Right" Foreground="#FF515151"/>
+                        <TextBlock x:Name="superstarLabel" Margin="6" FontSize="25" FontFamily="Roboto" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Text="Username"/>
+
+                        <Rectangle RadiusX="1" RadiusY="1" Grid.ColumnSpan="2" StrokeThickness="0" VerticalAlignment="Top" Margin="40,-1" Height="2" Grid.RowSpan="2" Grid.Row="1" Fill="#FFACACAC"/>
+
+                        <TextBlock x:Name="billTitleLabel" Text="Bill:" Margin="6" FontSize="25" FontFamily="Roboto" VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Right" Foreground="#FF515151" Grid.Row="1"/>
+                        <TextBlock x:Name="billLabel" Text="0$" Margin="6" FontSize="25" FontFamily="Roboto" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1"/>
+                        <material:MaterialButton Foreground="White" FontWeight="Medium" FontSize="25" x:Name="findSuperstar" Margin="10,0,10,10" Text="Find Superstar" ShadowEnabled="True" Click="ClickFindSuperstar" CornerRadius="4" Grid.Row="2" Background="{DynamicResource HighImportanceColor}" BorderBrush="{DynamicResource HighImportanceColorShade}" Grid.ColumnSpan="2"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Popup x:Name="NumberInputPanePopup" IsOpen="False" PopupAnimation="Fade" Placement="Center" Width="500" Height="200" Margin="-298,-148,298,148" AllowsTransparency="True">
+            <Grid x:Name="NumberInputPane" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Height="200">
+                <Grid>
+                    <Button IsHitTestVisible="True" Click="NumberInputPane_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid>
+                                    <Border Background="{TemplateBinding Background}"/>
+                                    <ContentPresenter/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Border IsHitTestVisible="True" UseLayoutRounding="True" Width="419" Height="190" Background="White" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="4">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" Opacity=".3" ShadowDepth="2"/>
+                        </Border.Effect>
+                        <Grid Margin="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="210*"/>
+                                <ColumnDefinition Width="193*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="115*"/>
+                                <RowDefinition Height="59*"/>
+                            </Grid.RowDefinitions>
+
+                            <material:MaterialButton x:Name="confirm" Click="ClickConfirm" Text="CONFIRM" Background="{x:Null}" Foreground="{DynamicResource HighImportanceColor}" FontSize="20" LeftMinWidth="15" RightMinWidth="15" FontWeight="Medium" Grid.Row="1"/>
+                            <material:MaterialButton x:Name="cancel" Click="ClickCancel" Text="CANCEL" Background="{x:Null}" Foreground="{DynamicResource HighImportanceColor}" FontSize="20" LeftMinWidth="15" RightMinWidth="15" FontWeight="Medium" Grid.Row="1" Grid.Column="1"/>
+
+                            <material:MaterialTextBoxFilled Margin="10" x:Name="numberInput" Label="Group size" ToolTip="Amount of members to generate" BorderThickness="0" FontSize="30" NumberPane="WholePlus" NumberValue="100" Grid.ColumnSpan="2"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Popup>
+    </Grid>
+</material:MaterialWindow>

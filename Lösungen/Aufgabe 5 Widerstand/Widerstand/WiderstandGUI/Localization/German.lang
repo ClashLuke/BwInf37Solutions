@@ -1,0 +1,30 @@
+﻿"Widerstand.ResistanceUnit" = "{0} Ω"
+
+"Widerstand.Resistance" = "Widerstand"
+"Widerstand.Target" = "Ziel"
+"Widerstand.Difference" = "Differenz"
+
+"Widerstand.Run.Confirm" = "BESTÄTIGEN"
+"Widerstand.Run.Cancel" = "ABBRECHEN"
+"Widerstand.Run.Count" = "Resistor Maximum"
+"Widerstand.Run.Count.Tooltip" = "Maximale erlaubte Menge von Resistoren (k)"
+"Widerstand.Run.Target" = "Ziel Widerstand"
+"Widerstand.Run.Target.Tooltip" = "Widerstand der versucht wird zu approximieren"
+
+"Widerstand.Resistors.Title" = ""
+"Widerstand.Resistors.Resistors" = "Widerstände"
+
+"Widerstand.Resistors.Generator.Minimum" = "Minimum"
+"Widerstand.Resistors.Generator.Minimum.Tooltip" = "Minimum Widerstand"
+"Widerstand.Resistors.Generator.Maximum" = "Maximum"
+"Widerstand.Resistors.Generator.Maximum.Tooltip" = "Maximum Widerstand"
+"Widerstand.Resistors.Generator.Count" = "Count"
+"Widerstand.Resistors.Generator.Count.Tooltip" = "Menge der Widerstände"
+
+"Widerstand.Resistors.Generator.AllowFraction" = "Brüche erlauben"
+"Widerstand.Resistors.Generator.AllowFraction.Tooltip" = "Ob non-ganze Zahlen erlaubt sind"
+
+"Widerstand.Resistors.Generator.Confirm" = "BESTÄTIGEN"
+"Widerstand.Resistors.Generator.Cancel" = "ABBRECHEN"
+
+"Widerstand.Resistors.FileSelector" = "Datei auswählen"

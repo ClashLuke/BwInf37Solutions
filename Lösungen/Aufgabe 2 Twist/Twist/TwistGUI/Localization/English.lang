@@ -1,0 +1,12 @@
+﻿"Twist.TwistButton" = "Twist"
+"Twist.DetwistButton" = "Detwist"
+"Twist.Settings" = "Select Language"
+
+"Twist.FileSelector.Long" = "Select file to (de)twist"
+"Twist.FileSelector.Invalid" = "Invalid file"
+
+"Twist.Finished.Title" = "Finished"
+"Twist.Finished.SaveResults" = "Save Results to"
+
+"Twist.Langcook.Open" = "Select .langcook or files to convert to one"
+"Twist.Langcook.Save" = "Save .langcook to"

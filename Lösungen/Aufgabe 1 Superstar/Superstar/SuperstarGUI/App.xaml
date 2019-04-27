@@ -1,0 +1,14 @@
+﻿<Application x:Class="SuperstarGUI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SuperstarGUI"
+             xmlns:material="clr-namespace:MaterialDesign2.Controls;assembly=MaterialDesign2"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Style x:Key="MaterialColorTheme" TargetType="{x:Type Grid}">
+        </Style>
+        <SolidColorBrush x:Key="HighImportanceColor" Color="#FF5F0CEF"/>
+        <SolidColorBrush x:Key="HighImportanceColorShade" Color="#FF4C20C3"/>
+        <SolidColorBrush x:Key="UsernameBrush" Color="#FF1A1A1A"/>
+    </Application.Resources>
+</Application>
